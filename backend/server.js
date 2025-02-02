@@ -13,7 +13,8 @@ connectDB();
 app.use("/api/properties", require("./routes/propertyRoutes"));
 app.use("/api/users", require("./routes/userRoutes"));
 app.use("/api/tenant", require("./routes/tenantRoutes"));
-app.use("/api/lease", require("./routes/LeaseRoutes"));
+app.use("/api/lease", require("./routes/leaseRoutes"));
+app.use("/api/payment", require("./routes/paymentRoute"));
 
 
 const PORT = process.env.PORT || 7000;

@@ -9,7 +9,6 @@ exports.getAllProperties = async (req, res) => {
     }
 };
 
-// Get a single property by ID
 exports.getPropertyById = async (req, res) => {
     try {
         const property = await Property.findById(req.params.id);
@@ -20,7 +19,7 @@ exports.getPropertyById = async (req, res) => {
     }
 };
 
-// Create a new property
+
 exports.createProperty = async (req, res) => {
     try {
         const newProperty = new Property(req.body);
@@ -31,7 +30,6 @@ exports.createProperty = async (req, res) => {
     }
 };
 
-// Update a property
 exports.updateProperty = async (req, res) => {
     try {
         const updatedProperty = await Property.findByIdAndUpdate(req.params.id, req.body, { new: true });
