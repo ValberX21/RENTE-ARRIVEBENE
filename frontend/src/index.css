@@ -1,13 +1,104 @@
-body {
+/* index.css */
+
+/* Universal reset for consistency */
+* {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Arial', sans-serif;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/* Root variables for easy theming */
+:root {
+  --dark-green: #013220;
+  --light-green: #67C867;
+  --accent-green: #28A745;
+  --text-color: #ffffff;
+  --input-bg: #f4f4f4;
+  --input-border: #000000; /* Black border */
+}
+
+/* Background gradient */
+body {
+  background: linear-gradient(120deg, var(--dark-green), var(--light-green));
+  color: var(--text-color);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Container styling */
+.container {
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  padding: 2rem;
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+/* Title styling */
+h1 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: var(--text-color);
+}
+
+/* Input field styling */
+input {
+  width: 100%;
+  padding: 0.75rem;
+  margin: 0.5rem 0;
+  border: 2px solid var(--input-border); /* Black border */
+  border-radius: 8px;
+  background-color: var(--input-bg);
+  font-size: 1rem;
+}
+
+/* Button styling */
+button {
+  width: 100%;
+  padding: 0.75rem;
+  margin-top: 1rem;
+  border: 2px solid var(--input-border); /* Black border */
+  border-radius: 8px;
+  background-color: var(--accent-green);
+  color: var(--text-color);
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+  background-color: #1e7e34;
+  transform: scale(1.02);
+}
+
+/* Link styling */
+a {
+  color: var(--light-green);
+  text-decoration: none;
+  font-weight: bold;
+  display: inline-block;
+  margin-top: 1rem;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Form styling */
+form {
+  margin-top: 1rem;
+}
+
+/* Error message styling */
+.error {
+  color: #ff6b6b;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
 }
