@@ -1,31 +1,26 @@
-import axios from 'axios';
+const loginUser = async (url, data) => {
+   
+    try {
+      const response = await fetch(url, {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      });
 
-const API_URL = 'http://localhost:7000/api';
+      if (!response.ok) {
+        const errorData = await response.json();
+        console.error("Server error:", errorData);
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
 
-const getToken = () => localStorage.getItem('token');  
+      return await response.json();
 
-const api = axios.create({
-    baseURL: API_URL,
-    headers: {
-        'Content-Type':'applicaiton/json',
-    },
-});
-
-api.interceptors.request.use((config) => {
-    const token = getToken();
-
-    if(token){
-        config.headers.Authorization = `Bearer ${token}`;
+    } catch (error) {
+      console.error("Fetch error:", error);
     }
-    return config;
-});
+  };
 
-export const loginUser = async (email, password) => 
-    api.post('/auth/login',{email,password});
-
-export const registerUser = async (userData) =>
-    api.post('/auth/register', userData);
-
-export const getAllUsers =  async () => api.get('/users');
-
-export default api;
+export default loginUser;

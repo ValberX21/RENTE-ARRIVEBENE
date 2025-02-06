@@ -2,22 +2,39 @@ import React, { useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import loginUser from '../services/api'
+
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { login } = useAuth();
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
+
     e.preventDefault();
-    const fakeUser = { email, password };
-    const acessToken = loginUser(fakeUser);
-    navigate("/dashboard");
+
+    try
+    {
+      const user = { email, password };
+      const acessToken =  await loginUser('http://localhost:7000/api/auth/login/', user);
+
+      if (acessToken) {
+        login(user);
+        navigate('/dashboard', { replace: true });
+    } else {
+        console.error("Login failed. No token received.");
+    }
+    }
+    catch(ex)
+    {
+      console.error('Something wrogn !:' + ex)
+    }
+   
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      <h1>Login</h1>
+      <h1>Welcome to Arrivabene Real estate</h1>
       <input
         type="email"
         placeholder="Email"

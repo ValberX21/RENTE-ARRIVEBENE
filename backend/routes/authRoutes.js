@@ -1,11 +1,9 @@
 const express = require('express');
 const router =  express.Router();
 const { loginUser } = require('../controllers/authenticationController');
+const  { validateUserRegister, validateUserLogin} =  require('../middleware/validateMiddleware');
 
-router.post('/login',loginUser);
 
-router.get('/protected', (req, res) => {
-    res.status(200).json({ message: "Access granted", user: req.user  });
-});
-
+router.post("/register", validateUserRegister);
+router.post("/login", validateUserLogin, loginUser);
 module.exports = router;

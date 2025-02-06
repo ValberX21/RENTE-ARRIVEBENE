@@ -3,7 +3,7 @@ const router =  express.Router();
 const UserController =  require("../controllers/userController")
 const protect = require("../middleware/authMiddleware"); 
 
-router.get("/",UserController.getAllUsers);
+router.get("/",protect,UserController.getAllUsers);
 router.get("/:id", UserController.getUserById);
 router.post("/", UserController.createUser);
 

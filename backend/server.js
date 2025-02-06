@@ -2,13 +2,14 @@ const express = require("express");
 const cors =  require("cors");
 const connectDB = require("./config/db");
 const authRoutes = require("./routes/authRoutes");
+const erroHandler = require('./middleware/errorMiddleware');
 require("dotenv").config();
 
 const app = express();
 
 app.use(express.json());
 app.use(cors());
-
+app.use(erroHandler);
 connectDB();
 
 app.use("/api/properties", require("./routes/propertyRoutes"));
