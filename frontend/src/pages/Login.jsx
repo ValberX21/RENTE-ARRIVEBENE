@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
-import loginUser from '../services/api'
+import {postBody} from '../services/api'
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -16,7 +16,7 @@ const Login = () => {
     try
     {
       const user = { email, password };
-      const acessToken =  await loginUser('http://localhost:7000/api/auth/login/', user);
+      const acessToken =  await postBody('http://localhost:7000/api/auth/login/', user);
 
       if (acessToken) {
         login(user);

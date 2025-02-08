@@ -1,0 +1,115 @@
+/* styles.css */
+
+/* Container principal */
+.property-manager {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-top: 90px;
+    height: calc(100vh - 60px); /* Adjust to fit the screen height */
+    padding: 20px;
+    box-sizing: border-box;
+    gap: 20px;
+  }
+  
+  /* Formulário fixado à esquerda */
+  .property-form {
+    padding: 20px;
+    background-color: #f7f7f7;
+    border-radius: 10px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    overflow-y: auto;
+    width: 500px;
+  }
+  
+  .property-form h2 {
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    text-align: center;
+    color: #333;
+  }
+  
+  .property-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .property-form input,
+  .property-form select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    box-sizing: border-box;
+  }
+  
+  .property-form button {
+    width: 100%;
+    padding: 10px;
+    background-color: #008000;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .property-form button:hover {
+    background-color: #005f00;
+  }
+  
+  /* Lista de propriedades no lado direito */
+  .property-list {
+    flex: 3; /* Reduced to make room for the wider form */
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    overflow-y: auto;
+    max-height: 87%; /* Ensures it fits within the viewport */
+    width: 500px;
+  }
+  
+  .property-list p {
+    font-size: 1.2rem;
+    text-align: center;
+    color: #000;
+  }
+  
+  /* Rolagem personalizada */
+  .property-form::-webkit-scrollbar,
+  .property-list::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  .property-form::-webkit-scrollbar-thumb,
+  .property-list::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 4px;
+  }
+  
+  .property-form::-webkit-scrollbar-thumb:hover,
+  .property-list::-webkit-scrollbar-thumb:hover {
+    background-color: #555;
+  }
+  
+  /* Responsividade */
+  @media (max-width: 768px) {
+    .property-manager {
+      flex-direction: column;
+      height: auto; /* Adjust height for smaller screens */
+    }
+  
+    .property-form,
+    .property-list {
+      max-width: 100%;
+      width: 100%;
+    }
+  }
+  

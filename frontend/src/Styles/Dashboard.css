@@ -15,7 +15,7 @@
 
 .App-header {
     background-color: #282c34;
-    position: fixed; /* Sticks the header to the top */
+    position: absolute; /* Sticks the header to the top */
     top: 0; /* Aligns it to the top */
     left: 0; /* Ensures it starts from the very left of the screen */
     width: 100%; /* Makes it span the full width of the screen */
@@ -43,3 +43,16 @@
         transform: rotate(360deg);
     }
 }
+
+
+.btn-green {
+    background-color: #22C55E; /* Verde suave */
+    color: white; /* Cor do texto */
+    border: 1px solid #16A34A; /* Borda ligeiramente mais escura */
+  }
+  
+  .btn-green:hover {
+    background-color: #16A34A; /* Tom mais escuro no hover */
+    color: white;
+  }
+  

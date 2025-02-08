@@ -1,4 +1,4 @@
-const loginUser = async (url, data) => {
+const postBody = async (url, data) => {
    
     try {
       const response = await fetch(url, {
@@ -23,4 +23,29 @@ const loginUser = async (url, data) => {
     }
   };
 
-export default loginUser;
+  const getList = async (url) => {
+   
+    try {
+      const response = await fetch(url, {
+        method: "Get",      
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        console.error("Server error:", errorData);
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      return response.json();
+
+    } catch (error) {
+      console.error("Fetch error:", error);
+    }
+  };
+
+
+export {postBody, getList};

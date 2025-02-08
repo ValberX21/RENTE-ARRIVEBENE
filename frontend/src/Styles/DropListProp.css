@@ -1,0 +1,76 @@
+.dropdown-list {
+    padding: 0px;
+    width: 300px;
+    max-width: 100%;
+    margin-bottom: 20px;
+}
+
+/* Dropdown label */
+.dropdown-list label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+/* Dropdown select element */
+.dropdown-list select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: #f9f9f9;
+    color: #333;
+    transition: border-color 0.3s ease;
+}
+
+/* Dropdown select focus effect */
+.dropdown-list select:focus {
+    border-color: #0015ff;
+    outline: none;
+}
+
+/* Dropdown option */
+.dropdown-list option {
+    padding: 10px;
+    font-size: 16px;
+    background-color: #fff;
+    color: #333;
+}
+
+/* Option hover effect */
+.dropdown-list option:hover {
+    background-color: #f0f0f0;
+}
+
+/* Button for submitting the dropdown selection */
+.dropdown-list button {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    color: white;
+    background-color: #0015ff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 15px;
+}
+
+/* Button hover effect */
+.dropdown-list button:hover {
+    background-color: #000cba;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .dropdown-container {
+        padding: 20px;
+    }
+
+    .dropdown-list {
+        width: 100%;
+        padding: 20px;
+    }
+}

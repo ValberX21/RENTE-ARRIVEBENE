@@ -2,7 +2,7 @@ const Property = require("../models/Property");
 
 exports.getAllProperties = async (req, res) => {
     try {
-        const properties = await Property.find();
+        const properties = await Property.find().sort({createdAt:-1});;
         res.json(properties);
     } catch (error) {
         res.status(500).json({ message: "Error retrieving properties" });
