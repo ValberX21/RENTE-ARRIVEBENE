@@ -4,6 +4,7 @@ import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import ProtectedRoute from "./Routes/ProtectedRoute";
 import Property from "./pages/Property";
+import Users from "./pages/Users";
 
 const App = () => {
   return (
@@ -13,6 +14,7 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute> } />
         <Route path="/property" element={<Property/> } />
+        <Route path="/users" element={<Users/>}/>
       </Routes>
     </Router>
   );

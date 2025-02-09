@@ -1,8 +1,8 @@
-const postBody = async (url, data) => {
+const postBody = async (url, data, httpType) => {
    
     try {
       const response = await fetch(url, {
-        method: "POST",
+        method: httpType,
         body: JSON.stringify(data),
         headers: {
           Accept: "application/json",

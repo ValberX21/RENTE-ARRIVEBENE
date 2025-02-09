@@ -16,7 +16,7 @@ const Login = () => {
     try
     {
       const user = { email, password };
-      const acessToken =  await postBody('http://localhost:7000/api/auth/login/', user);
+      const acessToken =  await postBody('http://localhost:7000/api/auth/login/', user, 'POST');
 
       if (acessToken) {
         login(user);

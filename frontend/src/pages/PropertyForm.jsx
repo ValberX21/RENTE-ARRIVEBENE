@@ -10,6 +10,7 @@ const PropertyForm = () =>{
     const [propertyAdress, setAdress] = useState('');
     const [propertyPrice, setPrice] = useState(0);
     const [propertyOwner, setOwner] = useState('');
+    const [propertyId, setPropId] = useState('');
     const [propertiesRegistred, setPropries] = useState([]); 
 
     const addProperty = async (e) =>{
@@ -37,6 +38,7 @@ const PropertyForm = () =>{
             return;
         }
 
+ 
         const dt =  
         {
             "name":propertyType,
@@ -47,22 +49,24 @@ const PropertyForm = () =>{
 
         try
         {
-            const response = await postBody('http://localhost:7000/api/properties/', dt); 
+          var response;
 
+          if(!propertyId)
+          {
+            response = await postBody('http://localhost:7000/api/properties/', dt, 'POST'); 
+            alert('Property added')
+          }
+          else
+          {
+            response = await postBody('http://localhost:7000/api/properties/'+propertyId, dt, 'PUT'); 
+            alert('Property updated')
+          }
 
-            if(response._id !== null)
-                {
-                  alert('Property added')
-          
-                  setPropries((properties) => [
-                    ...properties,
-                    { ...dt },
-                  ]);
-                }
-                else
-                {
-                  alert('Something was error at save task')
-            }
+          setPropries((properties) => [
+            ...properties,
+            { ...dt },
+          ]);
+
         }
         catch(erro)
         {
@@ -77,6 +81,16 @@ const PropertyForm = () =>{
 
     }
 
+    const devSelectHandler = (property) => {
+      console.log("Selected property:", property);
+
+      setPropId(property._id)
+      setType(property.propertyType);
+      setOwner(property.owner)
+      setAdress(property.address)
+      setPrice(property.price)
+    };
+
     const listProperties = async () => {
         try {
           const response = await getList('http://localhost:7000/api/properties');
@@ -87,6 +101,22 @@ const PropertyForm = () =>{
           alert('Failed to fetch tasks');
         }
       };
+
+      const deleteProperty = async ()  => {
+
+        const dt = {}
+
+        try 
+        {
+          const response = await postBody('http://localhost:7000/api/properties/'+ propertyId, dt ,'DELETE'); 
+          const properties = await response; 
+          alert('Property Deleted')
+        } 
+        catch (error) 
+        {
+          alert(error);
+        }
+      }
 
     useEffect(() => {
         listProperties();
@@ -99,15 +129,16 @@ const PropertyForm = () =>{
             {propertiesRegistred.length === 0 ? (
             <p>No tasks registered yet.</p>
             ) : (          
-                propertiesRegistred.map((property, index) => (
-                    <PropertyCard key={index} property={property}/>
+                propertiesRegistred.map((property, index) => (                  
+                  <PropertyCard property={property} propSelected={devSelectHandler} />
+               
             ))       
             )}
         </div>
   
         <div className="property-form">
           <h2>Register a Property</h2>
-          <form onSubmit={addProperty}>
+          <form>
 
           <div>
               <label>Select a type of property:</label>
@@ -147,7 +178,11 @@ const PropertyForm = () =>{
               />
             </div>            
 
-            <button type="submit">Add Property</button>
+            <div className="button-container">
+              <button type="submit" onClick={addProperty}>Add Property</button>
+              <button className="delete-btn" onClick={deleteProperty}>Delete Property</button>
+            </div>
+
           </form>
         </div>
       </div>

@@ -11,8 +11,8 @@ const NavBar = () =>{
             <NavLink to="/property" className="btn btn-green">
             Property
             </NavLink>
-            <NavLink to="/employer" className="btn btn-green">
-            Employer
+            <NavLink to="/users" className="btn btn-green">
+            Users
             </NavLink>
             <NavLink to="/others" className="btn btn-green">
             Others
