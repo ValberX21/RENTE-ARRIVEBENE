@@ -19,6 +19,7 @@ const Login = () => {
       const acessToken =  await postBody('http://localhost:7000/api/auth/login/', user, 'POST');
 
       if (acessToken) {
+        sessionStorage.setItem("token", acessToken.token);
         login(user);
         navigate('/dashboard', { replace: true });
     } else {

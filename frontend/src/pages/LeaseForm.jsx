@@ -1,46 +1,35 @@
 import React, { useState, useEffect  } from 'react';
 import {postBody, getList} from '../services/api';
 import  '../Styles/UserFormList.css';
-import DropListUsers from '../components/DropdpwmUsers';
-import UserCard from '../components/UserCard';
 
-const UserFormList = ()  => {
+const LeaseFormList = ()  => {
 
-    const [userId, setId] =  useState('');
-    const [userName, setName] = useState('');
-    const [userEmail, setEmail] = useState('');
-    const [userPassword, setPassword] = useState('');
-    const [userRole, setRole] = useState('');
-    const [userList, setListUsers] = useState([]); 
+    const [leaseId, setId] =  useState('');
+    const [leaseProperty, setProperty] = useState('');
+    const [leaseTenant, setTenant] = useState('');
+    const [leaseLandLord, setLandLord] = useState('');
+    const [leaseList, setListLease] = useState([]); 
 
-    const addUser = async (e) => {
+    const addLease = async (e) => {
 
       e.preventDefault();
 
-      if (!userName.trim())     
+      if (!leaseProperty.trim())     
         {
           alert('Please fill user name');
           return;
         }
-        else if (!userEmail.trim())
+        else if (!leaseTenant.trim())
         {
             alert('Please fill Email');
             return;
         }       
-        else if (!userId)
-        {   
-            if(userPassword)
-            {
-              alert('Please fill Password');
-              return;
-            }
+        else if (!leaseLandLord)
+        {  
+           
 
         }
-        else if(!userRole.trim())
-        {
-            alert('Please fill Role');
-            return;
-        }
+        
 
         const dt =  
         {
@@ -186,4 +175,4 @@ const UserFormList = ()  => {
         )
 }
 
-export default UserFormList;
+export default LeaseFormList;

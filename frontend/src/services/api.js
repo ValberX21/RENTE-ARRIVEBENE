@@ -25,12 +25,15 @@ const postBody = async (url, data, httpType) => {
 
   const getList = async (url) => {
    
+    const token = sessionStorage.getItem('token');
+
     try {
       const response = await fetch(url, {
         method: "Get",      
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`
         },
       });
 

@@ -11,7 +11,7 @@ class DropListUsers extends Component {
         { userTypeId: 0, userName: 'Select a user type' },
         { userTypeId: 1, userName: 'Manager' },
         { userTypeId: 2, userName: 'Employer' },
-        { userTypeId: 4, userName: 'Lordland' },
+        { userTypeId: 4, userName: 'Landlord' },
         { userTypeId: 5, userName: 'Tenant' }
     ]
     };
