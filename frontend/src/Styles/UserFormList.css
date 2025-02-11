@@ -59,11 +59,7 @@
     cursor: pointer;
     transition: background-color 0.3s ease;
   }
-  
-  .users-form button:hover {
-    /* background-color: #005f00; */
-  }
-  
+
   /* Lista de propriedades no lado direito */
   .users-list {
     flex: 3; /* Reduced to make room for the wider form */
@@ -140,4 +136,18 @@
     background-color: darkred; /* Darker red on hover */
   }
   
+  .lease-btn {
+    background-color: #007BFF; /* Red background */
+    color: white; /* White text */
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+  }
+  
+  .lease-btn:hover {
+    background-color: #0056D2; /* Darker red on hover */
+  }
   

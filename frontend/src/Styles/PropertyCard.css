@@ -31,4 +31,19 @@
   p{
     color: black;
   }
+
+  .lease-btn {
+    background-color: #007BFF; /* Red background */
+    color: white; /* White text */
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+  }
+  
+  .lease-btn:hover {
+    background-color: #0056D2; /* Darker red on hover */
+  }
   

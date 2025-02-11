@@ -41,14 +41,30 @@ const UserFormList = ()  => {
             alert('Please fill Role');
             return;
         }
+        
+        var dt =  {};
 
-        const dt =  
+        if (userId)
         {
-            "name":userName,
-            "email":userEmail,
-            "password":userPassword,
-            "role":userRole
+          if(userPassword)
+          {
+            dt = {
+                  "name":userName,
+                  "email":userEmail,
+                  "password":userPassword,
+                  "role":userRole
+                }
+          }
+          else
+          {
+            dt = {
+              "name":userName,
+              "email":userEmail,
+              "role":userRole
+            }
+          }
         }
+        
 
         try {
 

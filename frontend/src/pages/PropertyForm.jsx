@@ -181,6 +181,8 @@ const PropertyForm = () =>{
             <div className="button-container">
               <button type="submit" onClick={addProperty}>Add Property</button>
               <button className="delete-btn" onClick={deleteProperty}>Delete Property</button>
+              
+
             </div>
 
           </form>

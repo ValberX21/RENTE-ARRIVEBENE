@@ -59,11 +59,7 @@
     cursor: pointer;
     transition: background-color 0.3s ease;
   }
-  
-  .property-form button:hover {
-    /* background-color: #005f00; */
-  }
-  
+
   /* Lista de propriedades no lado direito */
   .property-list {
     flex: 3; /* Reduced to make room for the wider form */
@@ -139,5 +135,7 @@
   .delete-btn:hover {
     background-color: darkred; /* Darker red on hover */
   }
+
+ 
   
   
