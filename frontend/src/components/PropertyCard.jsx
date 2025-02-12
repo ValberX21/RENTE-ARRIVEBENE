@@ -1,9 +1,16 @@
 import  '../Styles/PropertyCard.css';
+import { useNavigate } from "react-router-dom";
 
 const PropertyCard = ({ property,propSelected }) => {
 
+  const navigate = useNavigate();
+
   const selectedProp = () =>{
     propSelected(property);
+  }
+
+  const createLease = () => {
+    navigate("/lease", { state: { property } });      
   }
 
   return (
@@ -15,12 +22,11 @@ const PropertyCard = ({ property,propSelected }) => {
       <p>Owner: {property.owner}</p>
 
       {property.available === true ? (
-        <button className="lease-btn">Lease Property</button>
+        <button onClick={() => createLease(property)} className="lease-btn">Lease Property</button>
       ) : (
         <button  style={{ display: 'none' }}></button>
       )
-    }
-      
+    }      
     </div>
   );
 };

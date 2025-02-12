@@ -130,7 +130,7 @@ const PropertyForm = () =>{
             <p>No tasks registered yet.</p>
             ) : (          
                 propertiesRegistred.map((property, index) => (                  
-                  <PropertyCard property={property} propSelected={devSelectHandler} />
+                  <PropertyCard key={index} property={property} propSelected={devSelectHandler} />
                
             ))       
             )}

@@ -5,6 +5,7 @@ import Dashboard from "./pages/Dashboard";
 import ProtectedRoute from "./Routes/ProtectedRoute";
 import Property from "./pages/Property";
 import Users from "./pages/Users";
+import Lease from "./pages/Lease";
 
 const App = () => {
   return (
@@ -15,6 +16,7 @@ const App = () => {
         <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute> } />
         <Route path="/property" element={<Property/> } />
         <Route path="/users" element={<Users/>}/>
+        <Route path="/lease" element={<Lease/>}/>
       </Routes>
     </Router>
   );
