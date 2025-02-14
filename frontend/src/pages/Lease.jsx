@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import "../Styles/PropertyForm.css";
-import { getList, postBody } from "../services/api";
+import { getList } from "../services/api";
 import DropdownStatusMatrial from '../components/DropdpwmStatusMatrial';
 import NavBar from "../components/NavBar";
+import DropdpwmPaymentOptions from "../components/DropdpwmGuaranteeOptions";
 
 const Lease = () => {
 
@@ -17,6 +18,17 @@ const Lease = () => {
   const [newUserCPF, setNewUserCPF] = useState('');
   const [newUserMatrialStatus, setMS] = useState('');
   const [newUserWhatsApp, setNewUserWhatsApp] = useState('');
+
+  const [blockPayment, setBlockPayment] = useState(null);
+
+  const [guaranteMethod, setguaranteeMethod] = useState('');
+
+  const [dates, setDates] = useState({ from: "", to: "" });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setDates((prev) => ({ ...prev, [name]: value }));
+  };
 
   useEffect(() => {
     
@@ -47,13 +59,19 @@ const Lease = () => {
     if(allCPFs.has(cpfFormat))
     {
       setFoundCPF(true);
+      setBlockPayment(true);
     }
     else
     {
       setFoundCPF(false);
+      setBlockPayment(true);
     } 
   };
 
+  const createLease = () => {
+    console.log(property.propertyType);
+  }
+  
   return (
     <div>
       <NavBar/>
@@ -117,9 +135,45 @@ const Lease = () => {
             </div>
           </form>
         }
+        {
+          blockPayment === true && 
+          <form>
+            <div>
+                <label>Guarantee Form</label>
+                 <DropdpwmPaymentOptions value={guaranteMethod} guaranteeMethodSelectHandler={setguaranteeMethod} />
+            </div>
+
+            <label>Lease term</label>
+            <div className="date-fields">
+            
+              <div className="form-group">
+                <label htmlFor="from">From:</label>
+                <input type="date" id="from" name="from" value={dates.from} onChange={handleChange} required />
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="to">To:</label>
+                <input type="date" id="to" name="to" value={dates.to} onChange={handleChange} required />
+              </div>
+            </div>
+            
+            <label>Adjustment date</label>
+            <input type='number'/>
+
+            <label>History</label>
+            <textarea
+            type="text"
+            id="maritalStatus"
+            name="maritalStatus"           
+            placeholder="Enter marital status"
+            required
+          />
+            
+          </form>
+        }
       </div>
 
-      <button disabled={!foundCPF}>Confirm Lease</button>
+      <button disabled={!foundCPF} onClick={() => createLease()} >Confirm Lease</button>
 
     </div>
     </div>
