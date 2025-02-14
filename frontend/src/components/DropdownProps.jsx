@@ -17,7 +17,6 @@ class DropListProp extends Component {
   }
 
   selectHandler = (e) =>{  
-    console.log(e.target.value)
     this.props.devSelectHandler(e.target.value) 
 }
 

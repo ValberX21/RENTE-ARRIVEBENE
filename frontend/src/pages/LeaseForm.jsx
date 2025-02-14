@@ -10,7 +10,7 @@ const LeaseFormList = ()  => {
     const [leaseLandLord, setLandLord] = useState('');
     const [leaseList, setListLease] = useState([]); 
 
-    const addLease = async (e) => {
+    const addUser = async (e) => {
 
       e.preventDefault();
 
@@ -111,67 +111,69 @@ const LeaseFormList = ()  => {
         }, [listUserss, addUser])
 
         return(
-            <div className="users-manager">
+                  
+          <div className="users-manager">
 
-            <div className="users-list">
-                {userList.length === 0 ? (
-                <p>No tasks registered yet.</p>
-                ) : (          
-                  userList.map((users, index) => (       
-                      <UserCard key={index} users={users} userSelected={SelectUser}/>           
-                   
-                ))       
-                )}
-            </div> 
-    
-            <div className="users-form">
-              <h2>Register a User</h2>
-              <form>      
-                <div>
-                  <label>User name:</label>
-                  <input
-                    type="text"               
-                    placeholder="Enter user name"
-                    id='userName'
-                    value={userName}
-                    onChange={(e) => setName(e.target.value)}
-                  />
-                </div>
+          <div className="users-list">
+              {userList.length === 0 ? (
+              <p>No tasks registered yet.</p>
+              ) : (          
+                userList.map((users, index) => (       
+                    <UserCard key={index} users={users} userSelected={SelectUser}/>           
+                
+              ))       
+              )}
+          </div> 
+
+          <div className="users-form">
+            <h2>Register a User</h2>
+            <form>      
+              <div>
+                <label>User name:</label>
+                <input
+                  type="text"               
+                  placeholder="Enter user name"
+                  id='userName'
+                  value={userName}
+                  onChange={(e) => setName(e.target.value)}
+                />
+              </div>
+
+            <div>
+                <label>Select a type of user:</label>
+                <DropListUsers value={userRole} devSelectHandler={setRole} /> 
+            </div>
 
               <div>
-                  <label>Select a type of user:</label>
-                  <DropListUsers value={userRole} devSelectHandler={setRole} /> 
+                <label>User email:</label>
+                <input
+                  type="text"               
+                  placeholder="Enter owner name"
+                  id ='userEmail'
+                  value={userEmail}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
               </div>
-   
-                <div>
-                  <label>User email:</label>
-                  <input
-                    type="text"               
-                    placeholder="Enter owner name"
-                    id ='userEmail'
-                    value={userEmail}
-                    onChange={(e) => setEmail(e.target.value)}
-                  />
-                </div>
-     
-                <div>
-                  <label>Type the password:</label>
-                  <input
-                    type="password"               
-                    placeholder="Enter password"
-                    id ='userPassword'
-                    value={userPassword}
-                    onChange={(e) => setPassword(e.target.value)}
-                  />
-                </div>            
-    
-                <div className="button-container">
-                <button onClick={addUser}>Add User</button>
-                <button onClick={deleteUser} className="delete-btn">Delete User</button> 
-                </div>             
-              </form>
-            </div>
+
+              <div>
+                <label>Type the password:</label>
+                <input
+                  type="password"               
+                  placeholder="Enter password"
+                  id ='userPassword'
+                  value={userPassword}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </div>            
+
+              <div className="button-container">
+              <button onClick={addUser}>Add User</button>
+              <button onClick={deleteUser} className="delete-btn">Delete User</button> 
+              </div>             
+            </form>
           </div>
+          </div>
+        
         )
 }
 

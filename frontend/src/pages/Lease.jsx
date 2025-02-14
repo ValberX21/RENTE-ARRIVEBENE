@@ -1,19 +1,29 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import "../Styles/PropertyForm.css";
-import { getList } from "../services/api";
+import { getList, postBody } from "../services/api";
+import DropdownStatusMatrial from '../components/DropdpwmStatusMatrial';
+import NavBar from "../components/NavBar";
 
 const Lease = () => {
+
   const location = useLocation();
-  const property = location.state?.property;
+  const [property, setProperty] = useState(location.state?.property || null);
 
   const [tenantCPF, setTenantCPF] = useState("");
-  const [allCPFs, setAllCPFs] = useState(new Set());
   const [foundCPF, setFoundCPF] = useState(null);
+  const [allCPFs, setAllCPFs] = useState(new Set());
+
+  const [newUserCPF, setNewUserCPF] = useState('');
+  const [newUserMatrialStatus, setMS] = useState('');
+  const [newUserWhatsApp, setNewUserWhatsApp] = useState('');
 
   useEffect(() => {
+    
     const fetchCPFs = async () => {
-      try {
+
+      try {     
+        
         const response = await getList('http://localhost:7000/api/users');
         const cpfList = response;
         const filterList = cpfList.map(user => user.cpf)
@@ -22,6 +32,7 @@ const Lease = () => {
         console.error("Error fetching CPFs:", error);
       }
     };
+
     fetchCPFs();
   }, []);
 
@@ -40,14 +51,13 @@ const Lease = () => {
     else
     {
       setFoundCPF(false);
-    }
-
-   
-
+    } 
   };
 
   return (
-    <div className="property-form">
+    <div>
+      <NavBar/>
+   <div className="property-form">
       <h2>Lease Property</h2>
       <p>
         <strong>Type:</strong> {property.propertyType}
@@ -68,44 +78,52 @@ const Lease = () => {
           placeholder="Enter Tenant CPF"
           id="TenantCPF"
           value={tenantCPF}
+          type='number'
           onChange={handleTenantCPFChange} 
           maxLength={11}
         />
-        {foundCPF === true && 
-        <form>
-          <p>Usuario ja cadastrado</p>
-
-          <div>
-              <label>User CPF</label>
-                <input
-                  type="number"               
-                  placeholder="Enter user CPF"                   
-                />
-          </div>
-
-          <div>
-              <label>User WhatsApp</label>
-                <input
-                  type="number"               
-                  placeholder="Enter user WhatsApp"                   
-                />
-          </div>
-
-          <div>
-              <label>Marital status</label>                
-          </div>
-
-
-        </form>}
+        {foundCPF === true &&       
+          <form>
+            <p>Usuario ja cadastrado</p>          
+           
+          </form>
+        }
         {foundCPF === false &&
-         <form>
-          <p>Usuario não cadastrado</p>
-          <button>Faça um cadastro rapido</button>
-        </form>}
+
+          <form>
+             <p>Usuario não cadastrado</p>
+            <div>
+                <label>User CPF</label>
+                  <input
+                    type="number"               
+                    placeholder="Enter user CPF"
+                    value={newUserCPF} 
+                    onChange={(e) => setNewUserCPF(e.target.value)}                  
+                  />
+            </div>
+            <div>
+                <label>User WhatsApp</label>
+                  <input
+                    type="number"               
+                    placeholder="Enter user WhatsApp"   
+                    value={newUserWhatsApp} 
+                    onChange={(e) => setNewUserWhatsApp(e.target.value)}                 
+                  />
+            </div>
+            
+            <div>
+                <label>Marital status</label> 
+                <DropdownStatusMatrial value={newUserMatrialStatus} matrialStatusSelectHandler={setMS} />               
+            </div>
+          </form>
+        }
       </div>
 
       <button disabled={!foundCPF}>Confirm Lease</button>
+
     </div>
+    </div>
+ 
   );
 };
 
