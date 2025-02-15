@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const tenantSchema = new mongoose.Schema({
     cpf: {type:Number, required:true, unique:true, length:11},
     name: { type: String },
-    email: { type: String, unique: true },
+    email: { type: String },
     phone: { type: String, required: true },
     property: { type: mongoose.Schema.Types.ObjectId, ref: "Property" },
     rentAmount: { type: Number },

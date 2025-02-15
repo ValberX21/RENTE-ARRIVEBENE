@@ -37,6 +37,26 @@ exports.getUserById = async (req,res) => {
     }
 }
 
+exports.getUserByCPF = async (req,res)=> {
+    try
+    {
+        const cpf = req.params.cpf || req.body.cpf || req.query.cpf;
+
+        if(!cpf) return res.status(404).json({message:'User not found here'});
+
+        const userDt = await User.findOne({ cpf });
+
+        if (!userDt) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        res.json(userDt);
+    }
+    catch(erro){
+        res.status(500).json({message:'Something was wrong in found user'});
+    }
+}
+
 exports.updateUser = async (req,res) => {
     try
     {

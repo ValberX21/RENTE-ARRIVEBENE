@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import "../Styles/PropertyForm.css";
-import { getList } from "../services/api";
+import { getList, postBody } from "../services/api";
 import DropdownStatusMatrial from '../components/DropdpwmStatusMatrial';
 import NavBar from "../components/NavBar";
 import DropdpwmPaymentOptions from "../components/DropdpwmGuaranteeOptions";
@@ -15,7 +15,6 @@ const Lease = () => {
   const [foundCPF, setFoundCPF] = useState(null);
   const [allCPFs, setAllCPFs] = useState(new Set());
 
-  const [newUserCPF, setNewUserCPF] = useState('');
   const [newUserMatrialStatus, setMS] = useState('');
   const [newUserWhatsApp, setNewUserWhatsApp] = useState('');
 
@@ -68,10 +67,72 @@ const Lease = () => {
     } 
   };
 
-  const createLease = () => {
-    console.log(property.propertyType);
+  const createLease = async () => {
+    
+    //Create lease
+    if(!dates.from){
+      alert('Please fill date from')
+      return;
+    }
+    else if(!dates.to){
+      alert('Please fill date to')
+      return;
+    }
+
+    try {
+
+      const formattedDate = formatDateForBackend(dates.from);
+
+      if(foundCPF)
+      {
+        //If user already exist in the base
+        const searchUserExisting = await getList('http://localhost:7000/api/users/foundCPF/' + tenantCPF)
+
+        const leaseDt = 
+        {
+          "tenant":searchUserExisting._id,
+          "property": property._id,
+          "startDate":dates.from,
+          "endDate":dates.to,
+          "rentAmount":property.price,
+          "status":'active',
+          "guarant":guaranteMethod,
+          "adjustmentDate":formattedDate
+        };
+
+        const reponse =  await postBody('http://localhost:7000/api/Lease',leaseDt,'POST');
+        console.log(reponse);
+
+      }
+      else
+      {
+        //Fast insert in user table (just essencial data)        
+        const fastCreateTenant = {
+          "cpf":tenantCPF,
+          "matrialStatus":newUserMatrialStatus,
+          "phone":newUserWhatsApp
+        }
+
+        const createNewUser =  await postBody('http://localhost:7000/api/tenant',fastCreateTenant,'POST');
+
+        console.log(createNewUser);
+      }   
+
+
+
+    } catch (error) {
+      console.log('There was some error in save Lease')
+    }    
   }
-  
+
+  const formatDateForBackend = (date) => {
+    if (!date) return null; // Handle empty case
+    const d = new Date(date);
+    const backendDate = d.toISOString().split('T')[0];
+    return backendDate;
+};
+
+
   return (
     <div>
       <NavBar/>
@@ -111,15 +172,6 @@ const Lease = () => {
           <form>
              <p>Usuario não cadastrado</p>
             <div>
-                <label>User CPF</label>
-                  <input
-                    type="number"               
-                    placeholder="Enter user CPF"
-                    value={newUserCPF} 
-                    onChange={(e) => setNewUserCPF(e.target.value)}                  
-                  />
-            </div>
-            <div>
                 <label>User WhatsApp</label>
                   <input
                     type="number"               
@@ -140,7 +192,7 @@ const Lease = () => {
           <form>
             <div>
                 <label>Guarantee Form</label>
-                 <DropdpwmPaymentOptions value={guaranteMethod} guaranteeMethodSelectHandler={setguaranteeMethod} />
+                 <DropdpwmPaymentOptions value={guaranteMethod} paymentMethodSelectHandler={setguaranteeMethod} />
             </div>
 
             <label>Lease term</label>
@@ -173,7 +225,7 @@ const Lease = () => {
         }
       </div>
 
-      <button disabled={!foundCPF} onClick={() => createLease()} >Confirm Lease</button>
+      <button  onClick={() => createLease()} >Confirm Lease</button>
 
     </div>
     </div>

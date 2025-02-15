@@ -10,4 +10,6 @@ router.post("/", UserController.createUser);
 router.put("/:id", UserController.updateUser);
 router.delete("/:id", UserController.deleteUser);
 
+router.get("/foundCPF/:cpf", UserController.getUserByCPF)
+
 module.exports = router;
