@@ -9,4 +9,6 @@ router.get("/:id", TenantController.getTenantById);
 router.put("/:id", TenantController.updateTenant);
 router.delete("/:id", TenantController.deleteTenant);
 
+router.get("/foundCPF/:cpf", TenantController.getTenantByCPF)
+
 module.exports = router;

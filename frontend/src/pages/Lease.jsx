@@ -24,6 +24,8 @@ const Lease = () => {
 
   const [dates, setDates] = useState({ from: "", to: "" });
 
+  const [history , setHistory] = useState('');
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setDates((prev) => ({ ...prev, [name]: value }));
@@ -35,7 +37,7 @@ const Lease = () => {
 
       try {     
         
-        const response = await getList('http://localhost:7000/api/users');
+        const response = await getList('http://localhost:7000/api/tenant/');
         const cpfList = response;
         const filterList = cpfList.map(user => user.cpf)
         setAllCPFs(new Set(filterList));
@@ -86,7 +88,7 @@ const Lease = () => {
       if(foundCPF)
       {
         //If user already exist in the base
-        const searchUserExisting = await getList('http://localhost:7000/api/users/foundCPF/' + tenantCPF)
+        const searchUserExisting = await getList('http://localhost:7000/api/tenant/foundCPF/' + tenantCPF)
 
         const leaseDt = 
         {
@@ -97,12 +99,11 @@ const Lease = () => {
           "rentAmount":property.price,
           "status":'active',
           "guarant":guaranteMethod,
-          "adjustmentDate":formattedDate
+          "adjustmentDate":formattedDate,
+          "history":history
         };
 
         const reponse =  await postBody('http://localhost:7000/api/Lease',leaseDt,'POST');
-        console.log(reponse);
-
       }
       else
       {
@@ -115,10 +116,34 @@ const Lease = () => {
 
         const createNewUser =  await postBody('http://localhost:7000/api/tenant',fastCreateTenant,'POST');
 
-        console.log(createNewUser);
+          console.log(createNewUser.tenant._id)
+
+
+        const leaseDt = 
+        {
+          "tenant":createNewUser.tenant._id,
+          "property": property._id,
+          "startDate":dates.from,
+          "endDate":dates.to,
+          "rentAmount":property.price,
+          "status":'active',
+          "guarant":guaranteMethod,
+          "adjustmentDate":formattedDate,
+          "history":history
+        };
+
+        const reponse =  await postBody('http://localhost:7000/api/Lease',leaseDt,'POST');
+        
       }   
 
-
+      setTenantCPF('');
+      setNewUserWhatsApp('');
+      setDates({ from: "", to: "" });
+      setFoundCPF('');
+      setHistory('');
+      newUserMatrialStatus(0);
+      setguaranteeMethod(0);
+      setMS(0);
 
     } catch (error) {
       console.log('There was some error in save Lease')
@@ -132,6 +157,10 @@ const Lease = () => {
     return backendDate;
 };
 
+const paymentMethodSelectHandler = (gm) =>
+{
+  console.log(gm._id)
+}
 
   return (
     <div>
@@ -214,11 +243,11 @@ const Lease = () => {
 
             <label>History</label>
             <textarea
-            type="text"
-            id="maritalStatus"
-            name="maritalStatus"           
-            placeholder="Enter marital status"
+            id="history"
+            name="history"               
             required
+            value={history}
+            onChange={(e) => setHistory(e.target.value)}
           />
             
           </form>

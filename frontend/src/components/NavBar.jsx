@@ -1,7 +1,17 @@
+import React from "react";
+import { useNavigate } from "react-router-dom";
 import { NavLink} from 'react-router-dom';
 import '../Styles/Dashboard.css';
 
 const NavBar = () =>{
+
+    const navigate = useNavigate();
+
+    const handlerLogout = () => {
+        sessionStorage.clear();
+        navigate('/login', { replace: true });
+    }
+
     return(
         <header className="App-header">
         <h3 className="d-flex justify-content-center m-3">Rent estate Arrive</h3>
@@ -14,15 +24,13 @@ const NavBar = () =>{
             <NavLink to="/users" className="btn btn-green">
             Users
             </NavLink>
-            <NavLink to="/others" className="btn btn-green">
-            Others
-            </NavLink>
         </nav>
 
         <nav className="navv navbar navbar-expand-sm">
             <ul className="navbar-nav">
                 <li className="nav-item m-1">
-                <NavLink className="btn btn-light btn-green">
+                <NavLink className="btn btn-light btn-green"
+                         onClick={() => handlerLogout}>
                     Logout
                 </NavLink>
                 </li>

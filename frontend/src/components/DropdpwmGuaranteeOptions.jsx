@@ -18,7 +18,6 @@ class DropdpwmPaymentOptions extends Component {
   }
 
   selectHandler = (e) =>{  
-    console.log(e.target.value)
     this.props.paymentMethodSelectHandler(e.target.value) 
 }
 

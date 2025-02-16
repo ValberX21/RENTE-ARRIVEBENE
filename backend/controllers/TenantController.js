@@ -4,7 +4,7 @@ exports.createTenant = async (req, res) => {
     try{
         const newTenant = new Tenant(req.body);
         await newTenant.save();
-        res.status(201).json({message:"Tenant created"})
+        res.status(201).json({message:"Tenant created", tenant: newTenant})
     }catch(error){
         res.status(500).json({message: "Erro creating tenant", error})
     }
@@ -58,5 +58,26 @@ exports.deleteTenant = async (req,res) => {
     catch(erro)
     {
         res.status(500).json({ message: "Error deleting tenant" });
+    }
+}
+
+
+exports.getTenantByCPF = async (req,res)=> {
+    try
+    {
+        const cpf = req.params.cpf || req.body.cpf || req.query.cpf;
+
+        if(!cpf) return res.status(404).json({message:'Tenant not found here'});
+
+        const tenantDt = await Tenant.findOne({ cpf });
+
+        if (!tenantDt) {
+            return res.status(404).json({ message: 'Tenant not found' });
+        }
+
+        res.json(tenantDt);
+    }
+    catch(erro){
+        res.status(500).json({message:'Something was wrong in found tenant'});
     }
 }
