@@ -20,6 +20,7 @@ app.use("/api/payment", require("./routes/paymentRoute"));
 app.use("/api/address", require("./routes/addressRoutes"));
 app.use("/api/auth", authRoutes);  
 
+//Just a test to merge
 
 
 const PORT = process.env.PORT || 7000;
