@@ -6,6 +6,7 @@ import ProtectedRoute from "./Routes/ProtectedRoute";
 import Property from "./pages/Property";
 import Users from "./pages/Users";
 import Lease from "./pages/Lease";
+import Address from "./pages/Address";
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
         <Route path="/property" element={<Property/> } />
         <Route path="/users" element={<Users/>}/>
         <Route path="/lease" element={<Lease/>}/>
+        <Route path="/address" element={<Address/>}/>
       </Routes>
     </Router>
   );

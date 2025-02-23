@@ -18,7 +18,7 @@ const PropertyCard = ({ property,propSelected }) => {
       <p style={{ display: 'none' }}>Property: {property._id}</p>
       <p>Property: {property.propertyType}</p>
       <p>Adress: {property.address}</p>
-      <p >Price: {property.price}</p>
+      <p>Price: {property.price}</p>
       <p>Owner: {property.owner}</p>
 
       {property.available === true ? (

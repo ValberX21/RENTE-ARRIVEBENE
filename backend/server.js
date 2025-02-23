@@ -17,6 +17,7 @@ app.use("/api/users", require("./routes/userRoutes"));
 app.use("/api/tenant", require("./routes/tenantRoutes"));
 app.use("/api/lease", require("./routes/leaseRoutes"));
 app.use("/api/payment", require("./routes/paymentRoute"));
+app.use("/api/address", require("./routes/addressRoutes"));
 app.use("/api/auth", authRoutes);  
 
 

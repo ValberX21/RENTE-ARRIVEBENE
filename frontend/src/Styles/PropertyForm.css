@@ -195,6 +195,41 @@
     font-size: 14px;
     box-sizing: border-box; /* Prevents extra width from padding */
   }
+
+  .input-group {
+    display: flex;
+    gap: 16px; /* Adds space between inputs */
+    align-items: center;
+  }
+
+  .input-container {
+    display: flex;
+    flex-direction: column;
+    flex: 1; /* Makes both inputs take equal width */
+  }
+
+  input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+  }
+
+  .property-grid table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.property-grid th, .property-grid td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.property-grid th {
+    background-color: #f4f4f4;
+    text-align: left;
+}
+
  
   
   
